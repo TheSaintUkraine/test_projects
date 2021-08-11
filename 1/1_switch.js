@@ -16,11 +16,11 @@ function Check(string) {
                 return false;
             }
          }
-         switch(o) {
-             case z:
-                 return true
-            default:
-                return false
+         if(o == z) {
+             return true;
+         }
+         else {
+             return false;
          }
 
 }
