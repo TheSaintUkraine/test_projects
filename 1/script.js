@@ -12,7 +12,7 @@ function Check(string) {
                 return false;
             }
          }
-         if(z == o && o>0) {
+         if(z == o) {
              return true;
          }
          else {
