@@ -21,6 +21,5 @@ function Check(string) {
 
 }
 console.log(Check([1,1,1,0,0,0]));
-console.log(Check(111000));
 console.log(Check("111o00"));
 console.log(Check("101010"));
