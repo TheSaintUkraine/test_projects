@@ -1,23 +1,21 @@
 class Check {
-    static o = 0;
-    static z = 0;
-    static check(string) {
+    static check(string,o = 0,z = 0) {
         for (let i = 0; i < string.length; i++) {
             switch(string[i]) {
                 case "0":
-                    this.z++;
+                    z++;
                     break;
                 case "1":
-                    this.o++;
+                    o++;
                     break;               
                 default:
                     return false;
             }
-            if(this.o < this.z) {
+            if(o < z) {
                 return false;
             }
          }
-         if(this.o == this.z) {
+         if(o == z) {
             return true;
         }
         else {
@@ -26,3 +24,5 @@ class Check {
     }
 }
 console.log(Check.check("101010"));
+console.log(Check.check([1,1,1,0,0,0]));
+console.log(Check.check("111o00"));
