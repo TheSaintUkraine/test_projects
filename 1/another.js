@@ -1,29 +1,23 @@
 class Check {
-    static o = 0;
-    static z = 0;
-
-    static Reset() {
-        this.o = 0;
-        this.z = 0;
-    }
     static check(string) {
-        this.Reset();
+        let o = 0;
+        let z = 0;
         for (let i = 0; i < string.length; i++) {
             switch(string[i]) {
                 case "0":
-                    this.z++;
+                    z++;
                     break;
                 case "1":
-                    this.o++;
+                    o++;
                     break;               
                 default:
                     return false;
             }
-            if(this.o < this.z) {
+            if(o < z) {
                 return false;
             }
          }
-         if(this.o == this.z) {
+         if(o == z) {
             return true;
         }
         else {
