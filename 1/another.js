@@ -1,7 +1,7 @@
 class Check {
     static check(string) {
-        let o = 0;
-        let z = 0;
+        var o = 0;
+        var z = 0;
         for (let i = 0; i < string.length; i++) {
             switch(string[i]) {
                 case "0":
