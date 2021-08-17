@@ -12,8 +12,7 @@ export default class App extends Component {
        turns:10,
        status:"Type something",
        display:"none",
-       history:[],
-       input:null
+       history:[]
     }
     this.Check = this.Check.bind(this);
     this.setUserValue = this.setUserValue.bind(this);
@@ -58,8 +57,7 @@ export default class App extends Component {
   setUserValue(e) {
     this.setState({display:"block"});
     this.setState({
-      userValue: e.target.value,
-      input:e.target
+      userValue: e.target.value
     })
   }
   render() {
