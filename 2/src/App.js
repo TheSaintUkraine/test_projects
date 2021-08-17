@@ -8,7 +8,7 @@ export default class App extends Component {
   
     this.state = {
        number:Math.floor(Math.random() * (100 - 1) + 1),
-       userValue:0,
+       userValue:null,
        turns:10,
        status:"Type something",
        display:"none",
@@ -23,34 +23,34 @@ export default class App extends Component {
     this.setState({
       number: Math.floor(Math.random() * (100 - 1) + 1),
       turns:10,
-      userValue:1,
+      userValue:"",
       status:"Type something",
-      display:"none"
+      display:"none",
+      history:[]
     })
-    document.getElementById("Input_userValue").value="";
-  }
 
+  }
   Check(e) {
     e.preventDefault();
     this.setState({turns:this.state.turns-1});
     if (this.state.turns > 1) {
       if(this.state.userValue > this.state.number) {
         this.setState({status:"Too high"});
-        this.state.history.unshift(this.state.userValue + "- Too high");
+        this.state.history.unshift(this.state.userValue + " - Too high");
       }
       else if (this.state.userValue < this.state.number) {
-        this.state.history.unshift(this.state.userValue + "- Too low");
+        this.state.history.unshift(this.state.userValue + " - Too low");
         this.setState({status:"Too low"});
       }
       else {
-        this.setState({status:"You win",opacity:"none"});
-        this.state.history.unshift(this.state.userValue + "- Win");
+        this.setState({status:"You win",display:"none"});
+        this.state.history.unshift(this.state.userValue + " - Win");
       }
       
     }
     else {
-      this.state.history.unshift(this.state.userValue + "- Lose");
-      this.setState({status:"You lose",opacity:"none"});
+      this.state.history.unshift(this.state.userValue + " - Lose");
+      this.setState({status:"You lose",display:"none"});
     }
   }
 
@@ -66,7 +66,7 @@ export default class App extends Component {
         <p>Turns: {this.state.turns}</p>
         <p>{this.state.status}</p>
         <form>
-          <input placeholder="Number" min="0" max="100" onChange={this.setUserValue} id="Input_userValue" type="number"></input>
+          <input value={this.state.userValue} placeholder="Number" onChange={this.setUserValue} min="0" max="100"  type="number"></input>
           <button style={{display:this.state.display}} onClick={this.Check}>Check</button>
           <button onClick={this.Start}>Restart</button>
         </form>
@@ -79,5 +79,4 @@ export default class App extends Component {
     )
   }
 }
-
 
