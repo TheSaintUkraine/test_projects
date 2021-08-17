@@ -11,7 +11,7 @@ export default class App extends Component {
        userValue:0,
        turns:10,
        status:"Type something",
-       opacity:"none",
+       display:"none",
        history:[],
        input:null
     }
@@ -26,9 +26,9 @@ export default class App extends Component {
       turns:10,
       userValue:1,
       status:"Type something",
-      opacity:"none",
+      display:"none"
     })
-    this.state.input.value = "";
+    document.getElementById("Input_userValue").value="";
   }
 
   Check(e) {
@@ -56,7 +56,7 @@ export default class App extends Component {
   }
 
   setUserValue(e) {
-    this.setState({opacity:"block"});
+    this.setState({display:"block"});
     this.setState({
       userValue: e.target.value,
       input:e.target
@@ -68,8 +68,8 @@ export default class App extends Component {
         <p>Turns: {this.state.turns}</p>
         <p>{this.state.status}</p>
         <form>
-          <input placeholder="Number" min="0" max="100" onChange={this.setUserValue} type="number"></input>
-          <button style={{display:this.state.opacity}} onClick={this.Check}>Check</button>
+          <input placeholder="Number" min="0" max="100" onChange={this.setUserValue} id="Input_userValue" type="number"></input>
+          <button style={{display:this.state.display}} onClick={this.Check}>Check</button>
           <button onClick={this.Start}>Restart</button>
         </form>
         <ul>
@@ -79,5 +79,4 @@ export default class App extends Component {
     )
   }
 }
-
 
