@@ -11,7 +11,7 @@ export default class App extends Component {
        userValue:0,
        turns:10,
        status:"Type something",
-       opacity:"block",
+       opacity:"none",
        history:[],
        input:null
     }
@@ -24,9 +24,9 @@ export default class App extends Component {
     this.setState({
       number: Math.floor(Math.random() * (100 - 1) + 1),
       turns:10,
-      userValue:0,
+      userValue:1,
       status:"Type something",
-      opacity:"block",
+      opacity:"none",
     })
     this.state.input.value = "";
   }
@@ -53,6 +53,7 @@ export default class App extends Component {
   }
 
   setUserValue(e) {
+    this.setState({opacity:"block"});
     this.setState({
       userValue: e.target.value,
       input:e.target
@@ -64,7 +65,7 @@ export default class App extends Component {
         <p>Turns: {this.state.turns}</p>
         <p>{this.state.status}</p>
         <form>
-          <input placeholder="Number" onChange={this.setUserValue} type="number"></input>
+          <input placeholder="Number" min="0" max="100" onChange={this.setUserValue} type="number"></input>
           <button style={{display:this.state.opacity}} onClick={this.Check}>Check</button>
           <button onClick={this.Start}>Restart</button>
         </form>
@@ -75,4 +76,6 @@ export default class App extends Component {
     )
   }
 }
+
+
 
