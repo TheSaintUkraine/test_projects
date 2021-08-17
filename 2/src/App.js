@@ -37,8 +37,10 @@ export default class App extends Component {
     if (this.state.turns > 1) {
       if(this.state.userValue > this.state.number) {
         this.setState({status:"Too high"});
+        this.state.history.unshift(<li key={this.state.history.length}>{this.state.userValue} - Too high</li>);
       }
       else if (this.state.userValue < this.state.number) {
+        this.state.history.unshift(<li key={this.state.history.length}>{this.state.userValue} - Too low</li>);
         this.setState({status:"Too low"});
       }
       else {
@@ -48,6 +50,7 @@ export default class App extends Component {
       
     }
     else {
+      this.state.history.unshift(<li key={this.state.history.length}>{this.state.userValue} - Lose</li>);
       this.setState({status:"You lose",opacity:"none"});
     }
   }
@@ -76,6 +79,5 @@ export default class App extends Component {
     )
   }
 }
-
 
 
