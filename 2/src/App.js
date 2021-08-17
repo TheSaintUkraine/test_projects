@@ -36,20 +36,20 @@ export default class App extends Component {
     if (this.state.turns > 1) {
       if(this.state.userValue > this.state.number) {
         this.setState({status:"Too high"});
-        this.state.history.unshift(<li key={this.state.history.length}>{this.state.userValue} - Too high</li>);
+        this.state.history.unshift(this.state.userValue + "- Too high");
       }
       else if (this.state.userValue < this.state.number) {
-        this.state.history.unshift(<li key={this.state.history.length}>{this.state.userValue} - Too low</li>);
+        this.state.history.unshift(this.state.userValue + "- Too low");
         this.setState({status:"Too low"});
       }
       else {
         this.setState({status:"You win",opacity:"none"});
-        this.state.history.unshift(<li key={this.state.history.length}>{this.state.userValue} - Win</li>);
+        this.state.history.unshift(this.state.userValue + "- Win");
       }
       
     }
     else {
-      this.state.history.unshift(<li key={this.state.history.length}>{this.state.userValue} - Lose</li>);
+      this.state.history.unshift(this.state.userValue + "- Lose");
       this.setState({status:"You lose",opacity:"none"});
     }
   }
@@ -71,10 +71,13 @@ export default class App extends Component {
           <button onClick={this.Start}>Restart</button>
         </form>
         <ul>
-          {this.state.history}
+        {this.state.history.map((item) =>
+          <li key={item.toString()}> {item} </li>
+         )}
         </ul>
       </div>
     )
   }
 }
+
 
