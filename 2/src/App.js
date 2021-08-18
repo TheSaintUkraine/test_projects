@@ -8,7 +8,7 @@ export default class App extends Component {
   
     this.state = {
        number:Math.floor(Math.random() * (100 - 1) + 1),
-       userValue:null,
+       userValue:"",
        turns:10,
        status:"Type something",
        display:"none",
@@ -36,20 +36,20 @@ export default class App extends Component {
     if (this.state.turns > 1) {
       if(this.state.userValue > this.state.number) {
         this.setState({status:"Too high"});
-        this.state.history.unshift(this.state.userValue + " - Too high");
+        this.state.history.unshift({value:this.state.userValue,status:"Too high"});
       }
       else if (this.state.userValue < this.state.number) {
-        this.state.history.unshift(this.state.userValue + " - Too low");
+        this.state.history.unshift({value:this.state.userValue,status:"Too low"});
         this.setState({status:"Too low"});
       }
       else {
         this.setState({status:"You win",display:"none"});
-        this.state.history.unshift(this.state.userValue + " - Win");
+        this.state.history.unshift({value:this.state.userValue,status:"Win",color:"green"});
       }
       
     }
     else {
-      this.state.history.unshift(this.state.userValue + " - Lose");
+      this.state.history.unshift({value:this.state.userValue,status:"Lose",color:"red"});
       this.setState({status:"You lose",display:"none"});
     }
   }
@@ -71,12 +71,16 @@ export default class App extends Component {
           <button onClick={this.Start}>Restart</button>
         </form>
         <ul>
-        {this.state.history.map((item) =>
-          <li key={item.toString()}> {item} </li>
+        {this.state.history.map((item,i) =>
+          
+            <li className={item.color} key={i.toString()}> {item.value} - {item.status}</li>
+          
          )}
         </ul>
       </div>
     )
   }
 }
+
+
 
