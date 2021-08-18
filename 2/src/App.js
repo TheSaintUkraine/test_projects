@@ -73,7 +73,7 @@ export default class App extends Component {
         <ul>
         {this.state.history.map((item,i) =>
           
-            <li className={item.color} key={i.toString()}> {item.value} - {item.status}</li>
+            <li style={{color:item.color}} key={i.toString()}> {item.value} - {item.status}</li>
           
          )}
         </ul>
