@@ -7,7 +7,8 @@ export default class App extends Component {
     super(props)
   
     this.state = {
-       number:Math.floor(Math.random() * (100 - 1) + 1),
+       max:100,
+       number:Math.floor(Math.random() * (this.max - 1) + 1),
        userValue:"",
        turns:10,
        status:"Type something",
@@ -21,7 +22,7 @@ export default class App extends Component {
   Start(e) {
     e.preventDefault();
     this.setState({
-      number: Math.floor(Math.random() * (100 - 1) + 1),
+      number: Math.floor(Math.random() * (this.state.max - 1) + 1),
       turns:10,
       userValue:"",
       status:"Type something",
@@ -35,29 +36,39 @@ export default class App extends Component {
     this.setState({turns:this.state.turns-1});
     if (this.state.turns > 1) {
       if(this.state.userValue > this.state.number) {
-        this.setState({status:"Too high"});
-        this.state.history.unshift({value:this.state.userValue,status:"Too high"});
+        this.setState(prevState =>({
+          status:"Too high",
+          history:[...prevState.history,{value:this.state.userValue,status:"Too high"}]
+        }));
       }
       else if (this.state.userValue < this.state.number) {
-        this.state.history.unshift({value:this.state.userValue,status:"Too low"});
-        this.setState({status:"Too low"});
+        this.setState(prevState =>({
+          status:"Too low",
+          history:[...prevState.history,{value:this.state.userValue,status:"Too low"}]
+        }));
       }
       else {
-        this.setState({status:"You win",display:"none"});
-        this.state.history.unshift({value:this.state.userValue,status:"Win",color:"green"});
+        this.setState( prevState => ({
+          status:"You win",
+          display:"none",
+          history:[...prevState.history,{value:this.state.userValue,status:"Win",color:"green"}]
+        }));
       }
       
     }
     else {
-      this.state.history.unshift({value:this.state.userValue,status:"Lose",color:"red"});
-      this.setState({status:"You lose",display:"none"});
+      this.setState(prevState=>({
+        status:"You lose",
+        display:"none",
+        history:[...prevState.history,{value:this.state.userValue,status:"Lose",color:"red"}]
+      }));
     }
   }
 
   setUserValue(e) {
-    this.setState({display:"block"});
     this.setState({
-      userValue: e.target.value
+      userValue: e.target.value,
+      display:"block"
     })
   }
   render() {
@@ -66,7 +77,7 @@ export default class App extends Component {
         <p>Turns: {this.state.turns}</p>
         <p>{this.state.status}</p>
         <form>
-          <input value={this.state.userValue} placeholder="Number" onChange={this.setUserValue} min="0" max="100"  type="number"></input>
+          <input value={this.state.userValue} placeholder="Number" onChange={this.setUserValue} min="0" max={this.state.max}  type="number"></input>
           <button style={{display:this.state.display}} onClick={this.Check}>Check</button>
           <button onClick={this.Start}>Restart</button>
         </form>
@@ -81,6 +92,4 @@ export default class App extends Component {
     )
   }
 }
-
-
 
