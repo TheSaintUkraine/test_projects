@@ -17,6 +17,7 @@ app.use("/second_game",express.static(__dirname+"/build"))
 app.post("/getQuestion",urlEncoded,(req,res)=>{
     if(!req.body.answer) {
         req.session.user = new User(0,1000,0);
+        req.session.user.Test()
     }
     else {
         switch(req.body.answer) {
@@ -28,10 +29,12 @@ app.post("/getQuestion",urlEncoded,(req,res)=>{
                 break;
         }
     }
-    req.session.user.lastNumber = Math.floor(((req.session.user.max - req.session.user.min)/2) + req.session.user.min);
+    req.session.user.lastNumber = getResult(req.session.user.max,req.session.user.min);
     res.send((req.session.user.lastNumber).toString());
 })
-
+function getResult(max,min) {
+    return Math.floor(((max - min)/2) + min);
+}
 class User {
     constructor(min,max,lastNumber) {
         this.min = min;
